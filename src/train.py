@@ -1,9 +1,5 @@
-import pickle
 import time
 import gzip
-import zlib
-import _pickle as cPickle
-import json
 
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.linear_model import LogisticRegressionCV
@@ -12,17 +8,17 @@ from sklearn.externals import joblib
 
 
 class pos_tagger():
+    """Part-of-speech(pos) tagger class for the English language"""
 
     def __init__(self):
         self.sentences  = list()
         self.features   = list()
         self.pos_labels = list()
         self.vectorizer = DictVectorizer()
-        self.model      = LogisticRegressionCV(n_jobs=-1,
-                                               verbose=1,
-                                               random_state=123)
+        self.model      = LogisticRegressionCV(random_state=123)
 
     def read_data(self, train_datapath):
+        """Read sentences from given corpus data"""
         self.sentences  = []
         with open(train_datapath, 'r') as infile:
             sent = []
@@ -38,6 +34,7 @@ class pos_tagger():
         return
 
     def get_feature(self, token, token_index, sent):
+        """Extract features of given word(token)"""
         token_feature = {
                         'token'             : token,
                         'is_first'          : token_index == 0,
@@ -63,6 +60,7 @@ class pos_tagger():
         return  token_feature
 
     def form_data(self):
+        """Create datasets for training/evaluation/testing"""
         self.features   = []
         self.pos_labels = []
         for sent in self.sentences:
@@ -77,6 +75,7 @@ class pos_tagger():
         return
 
     def train(self, train_datapath):
+        """Train part-of-speech(pos) tagger model"""
         self.read_data(train_datapath)
         self.form_data()
         print("-> Training phase is started.")
@@ -90,6 +89,7 @@ class pos_tagger():
         return
 
     def evaluate(self, datapath):
+        """Evaluate the accuracy of trained part-of-speech(pos) tagger on given development/test corpus data"""
         self.read_data(datapath)
         self.form_data()
         preds       = self.model.predict(self.vectorizer.transform(self.features))
@@ -99,6 +99,7 @@ class pos_tagger():
         return acc_score
 
     def test(self, datapath):
+        """Measure various score values of part-of-speech(pos) tagger on given development/test corpus data"""
         self.read_data(datapath)
         self.form_data()
         preds       = self.model.predict(self.vectorizer.transform(self.features))
@@ -110,6 +111,7 @@ class pos_tagger():
         return precision, recall, f1, accuracy, conf_matrix
 
     def tag(self, sentence):
+        """Tag single sentence"""
         self.sentences = list([sentence])
         self.form_data()
         preds       = (self.model.predict(self.vectorizer.transform(self.features)))
@@ -117,18 +119,21 @@ class pos_tagger():
         return tagged_sent
 
     def tag_sents(self, sentences):
+        """Tag multiple sentences"""
         tagged_sents = list()
         for sent in sentences:
             tagged_sents.append(self.tag(sent))
         return tagged_sents
 
     def save(self, save_path):
+        """Save part-of-speech(pos) tagger"""
         with gzip.GzipFile(save_path, 'wb') as outfile:
             joblib.dump((self.vectorizer, self.model), outfile, compress=('gzip', 9))
         print("-> POS tagger is saved to '%s'" % save_path)
         return
 
     def load(self, load_path):
+        """Load part-of-speech(pos) tagger"""
         with gzip.GzipFile(load_path, 'rb') as infile:
             self.vectorizer, self.model = joblib.load(infile)
         print("-> POS tagger is loaded from '%s'" % load_path)
@@ -137,14 +142,20 @@ class pos_tagger():
 
 def main():
 
-    TRAIN_DATAPATH          = '../data/en-ud-train.conllu'
-    DEV_DATAPATH            = '../data/en-ud-dev.conllu'
+    # SET CORPUS DATA PATHS
+    TRAIN_DATAPATH  = '../data/en-ud-train.conllu'
+    DEV_DATAPATH    = '../data/en-ud-dev.conllu'
 
-    tagger = pos_tagger()
+    # INITIALIZE POS TAGGER
+    tagger  = pos_tagger()
 
+    # TRAIN POS TAGGER WITH TRAINING CORPUS
     tagger.train(TRAIN_DATAPATH)
+
+    # EVALUATE (GET ACCURACY OF) POS TAGGER ON DEVELOPMENT CORPUS
     tagger.evaluate(DEV_DATAPATH)
 
+    # MEASURE SCORES OF POS TAGGER ON DEVELOPMENT CORPUS AND DISPLAY SCORES
     precision, recall, f1, accuracy, confusion = tagger.test(DEV_DATAPATH)
     print('test pre:', precision)
     print('test rec:', recall)
@@ -152,15 +163,21 @@ def main():
     print('test acc:', accuracy)
     print('test con:', confusion)
 
-    SAVE_PATH = '../model/pos_tagger.gz'
+    # SAVE POS TAGGER
+    SAVE_PATH   = '../model/pos_tagger.gz'
     tagger.save(SAVE_PATH)
 
-    SAVE_PATH = '../model/pos_tagger.gz'
-    tagger = pos_tagger()
-    tagger.load(SAVE_PATH)
+    # LOAD POS TAGGER
+    LOAD_PATH   = SAVE_PATH
+    tagger      = pos_tagger()
+    tagger.load(LOAD_PATH)
 
+    # TAG SINGLE SENTENCE
     print(tagger.tag(['I', 'do', 'n\'t', 'think', 'it', 'matters']))
+
+    # TAG MULTIPLE SENTENCES
     print(tagger.tag_sents([['I', 'do', 'n\'t', 'think', 'it', 'matters'], ['Gets', 'the', 'Job', 'Done']]))
+
     return
 
 if __name__ == '__main__':

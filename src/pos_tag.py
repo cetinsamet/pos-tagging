@@ -8,13 +8,20 @@ def main(argv):
         print("Usage: python3 pos_tag.py input-sentence")
         exit()
 
-    sent    = argv[0]
-    sent    = word_tokenize(sent)
+    # READ USER INPUT SENTENCE
+    sent        = argv[0]
 
+    # TOKENIZE INPUT SENTENCE
+    sent        = word_tokenize(sent)
+
+    # LOAD TRAINED POS TAGGER
     LOAD_PATH   = '../model/pos_tagger.gz'
-    tagger  = pos_tagger()
+    tagger      = pos_tagger()
     tagger.load(LOAD_PATH)
+
+    # DISPLAY TAGGED SENTENCE
     print(tagger.tag(sent))
+
     return
 
 if __name__ == '__main__':
