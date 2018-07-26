@@ -173,10 +173,11 @@ def main():
     tagger.load(LOAD_PATH)
 
     # TAG SINGLE SENTENCE
-    print(tagger.tag(['I', 'do', 'n\'t', 'think', 'it', 'matters']))
+    print(tagger.tag(['I', 'am', 'the', 'only', 'one', 'here', '.']))
 
     # TAG MULTIPLE SENTENCES
-    print(tagger.tag_sents([['I', 'do', 'n\'t', 'think', 'it', 'matters'], ['Gets', 'the', 'Job', 'Done']]))
+    print(tagger.tag_sents([['I', 'am', 'the', 'only', 'one', 'here', '.'], \
+                            ['Funny', ',', 'I', '\'ve', 'been', 'thinking', 'the', 'same', 'thing', '.']]))
 
     return
 
