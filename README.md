@@ -8,7 +8,7 @@ Therefore, it does not perform well enough.
   
 I encourage you to train a new model on your own using the corpus in data/ directory.  
 My training lasted 32 minutes on a device with 3,1 GHz Intel Core i7 processor.  
-The accuracy was **100%** where development accuracy was **93%**.  
+Training accuracy was **100%** where development accuracy was **93%**.  
   
 ## Usage  
 $**python3**  pos_tag.py  input-sentence  
