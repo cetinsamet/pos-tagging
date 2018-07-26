@@ -7,8 +7,8 @@ Model in the repo is trained using mini data which contains only almost 3,000 En
 Therefore, it does not perform well enough.  
   
 I encourage you to train a new model on your own using the corpus in data/ directory.  
-Training lasted 32 minutes on a device with 3,1 GHz Intel Core i7 processor.  
-Training accuracy is **100%** where development accuracy is **93%**.  
+My training lasted 32 minutes on a device with 3,1 GHz Intel Core i7 processor.  
+The accuracy was **100%** where development accuracy was **93%**.  
   
 ## Usage  
 $**python3**  pos_tag.py  input-sentence  
