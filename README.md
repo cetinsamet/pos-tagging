@@ -1,6 +1,6 @@
 # pos-tagger
 Implementation of a part-of-speech tagger for the English language  
-A MaxEnt model is trained with a corpus containing almost 12,000 English sentences.  
+A part-of-speech model is trained with a corpus containing almost 12,000 English sentences.  
   
 ## Model  
 Model in the repo is trained using mini data which contains only almost 3,000 English sentences.  
