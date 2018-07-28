@@ -7,7 +7,7 @@ from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_sc
 from sklearn.externals import joblib
 
 
-class pos_tagger():
+class PosTagger():
     """Part-of-speech(pos) tagger class for the English language"""
 
     def __init__(self):
@@ -147,7 +147,7 @@ def main():
     DEV_DATAPATH    = '../data/en-ud-dev.conllu'
 
     # INITIALIZE POS TAGGER
-    tagger  = pos_tagger()
+    tagger  = PosTagger()
 
     # TRAIN POS TAGGER WITH TRAINING CORPUS
     tagger.train(TRAIN_DATAPATH)
@@ -164,12 +164,12 @@ def main():
     print('test con:', confusion)
 
     # SAVE POS TAGGER
-    SAVE_PATH   = '../model/pos_tagger.gz'
+    SAVE_PATH   = '../model/postag_model.gz'
     tagger.save(SAVE_PATH)
 
     # LOAD POS TAGGER
-    LOAD_PATH   = SAVE_PATH
-    tagger      = pos_tagger()
+    LOAD_PATH   = '../model/postag_model.gz'
+    tagger      = PosTagger()
     tagger.load(LOAD_PATH)
 
     # TAG SINGLE SENTENCE

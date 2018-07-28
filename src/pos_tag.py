@@ -1,6 +1,6 @@
 import sys
 from nltk.tokenize import word_tokenize
-from train import pos_tagger
+from train import PosTagger
 
 
 def main(argv):
@@ -15,8 +15,8 @@ def main(argv):
     sent        = word_tokenize(sent)
 
     # LOAD TRAINED POS TAGGER
-    LOAD_PATH   = '../model/pos_tagger.gz'
-    tagger      = pos_tagger()
+    LOAD_PATH   = '../model/postag_model.gz'
+    tagger      = PosTagger()
     tagger.load(LOAD_PATH)
 
     # DISPLAY TAGGED SENTENCE
