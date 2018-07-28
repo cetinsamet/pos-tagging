@@ -3,7 +3,7 @@ Implementation of a part-of-speech tagger for the English language
 A part-of-speech model is trained with a corpus containing almost 12,000 English sentences.  
   
 ## Model  
-Model in the repo is trained using mini data which contains only almost 3,000 English sentences.  
+Model (mini model) in the repo is trained using mini data which contains only almost 3,000 English sentences.  
 Therefore, it does not perform well enough.  
   
 I encourage you to train a new model on your own using the corpus in data/ directory.  
