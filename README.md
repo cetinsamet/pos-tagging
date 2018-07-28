@@ -17,8 +17,7 @@ $**python3**  pos_tag.py  input-sentence
 $**cd**  src  
 $**python3** pos_tag.py  "Peace at home, peace in the world."  
 **->** POS tagger is loaded.  
-**->** [('Peace', 'NN'), ('at', 'DT'), ('home', 'NN'), (',', ','), ('peace', 'NN'), ('in', 'PRP'), ('the', 'VBP'), ('world', 'IN'), ('.', '.')]  
-  
+**->** [('Peace', 'NN'), ('at', 'DT'), ('home', 'NN'), (',', ','), ('peace', 'NN'), ('on', 'IN'), ('earth', 'NN'), ('.', '.')]   
 *P.S. Above example is tested with a model trained on corpus in data/ directory(with almost 12,000 English sentences).*  
   
     
