@@ -5,7 +5,7 @@ A part-of-speech model is trained with a corpus containing almost 12,000 English
 Check for detailed Medium story that I wrote: https://medium.com/@cetinsamet/part-of-speech-pos-tagging-8af646a3d5bb  
   
 ## Model  
-Model (mini model) in the repo is trained using mini data which contains only almost 3,000 English sentences.  
+Model (mini model) in the repo is trained using mini data which contains only almost 100 English sentences.  
 Therefore, it does not perform well enough.  
   
 I encourage you to train a new model on your own using the corpus in data/ directory.  
