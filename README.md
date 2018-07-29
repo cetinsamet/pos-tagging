@@ -25,4 +25,4 @@ $**python3** pos_tag.py  "Peace at home, peace in the world."
   
     
 > Peace at home, peace in the world.  
-> Mustafa Kemal ATATÜRK  
+> Mustafa Kemal Atatürk
