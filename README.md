@@ -1,6 +1,6 @@
 # pos-tagger
 Implementation of a part-of-speech tagger for the English language  
-A part-of-speech model is trained with a corpus containing almost 12,000 English sentences. 
+A part-of-speech tagger model is trained with a corpus containing almost 12,000 English sentences. 
   
 Check for detailed Medium story that I wrote: https://medium.com/@cetinsamet/part-of-speech-pos-tagging-8af646a3d5bb  
   
